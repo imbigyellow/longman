@@ -1,12 +1,6 @@
 const express = require('express');
-const chromium = require('@sparticuz/chromium');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const app = express();
-
-// 根路径处理函数
-app.get('/', (req, res) => {
-    res.send('API is working. Use the /define endpoint to get word definitions.');
-});
 
 app.get('/define', async (req, res) => {
     const query = req.query.q;
@@ -16,12 +10,9 @@ app.get('/define', async (req, res) => {
 
     try {
         const browser = await puppeteer.launch({
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
-
         const page = await browser.newPage();
         await page.goto(`https://www.ldoceonline.com/jp/dictionary/${query}`);
 
@@ -38,7 +29,6 @@ app.get('/define', async (req, res) => {
     }
 });
 
-// 设置监听端口
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
