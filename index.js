@@ -1,5 +1,6 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 const app = express();
 
 app.get('/define', async (req, res) => {
@@ -10,14 +11,12 @@ app.get('/define', async (req, res) => {
 
     try {
         const browser = await puppeteer.launch({
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--disable-gpu'
-            ],
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath,
+            headless: chromium.headless,
         });
+
         const page = await browser.newPage();
         await page.goto(`https://www.ldoceonline.com/jp/dictionary/${query}`);
 
