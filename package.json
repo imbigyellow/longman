@@ -1,5 +1,5 @@
 {
-  "name": "dictionary-api",
+  "name": "longman",
   "version": "1.0.0",
   "description": "A simple API to fetch word definitions from Longman Dictionary",
   "main": "index.js",
@@ -9,5 +9,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "puppeteer": "^13.0.0"
-  }
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "",
+  "license": "ISC"
 }
