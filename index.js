@@ -3,7 +3,7 @@ const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 const app = express();
 
-// 处理根路径请求
+// 根路径处理函数
 app.get('/', (req, res) => {
     res.send('API is working. Use the /define endpoint to get word definitions.');
 });
