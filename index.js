@@ -28,7 +28,7 @@ app.get('/define', async (req, res) => {
         await browser.close();
         res.json({ word: query, definition });
     } catch (error) {
-        console.error(error);
+        console.error('Error details:', error);
         res.status(500).send('Error occurred while fetching the definition');
     }
 });
