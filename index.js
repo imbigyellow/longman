@@ -2,6 +2,10 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const app = express();
 
+app.get('/', (req, res) => {
+    res.send('API is working. Use the /define endpoint to get word definitions.');
+});
+
 app.get('/define', async (req, res) => {
     const query = req.query.q;
     if (!query) {
