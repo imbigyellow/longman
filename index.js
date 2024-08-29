@@ -1,5 +1,5 @@
 const express = require('express');
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 const app = express();
 
@@ -13,7 +13,7 @@ app.get('/define', async (req, res) => {
         const browser = await puppeteer.launch({
             args: chromium.args,
             defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath,
+            executablePath: await chromium.executablePath(),
             headless: chromium.headless,
         });
 
