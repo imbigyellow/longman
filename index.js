@@ -10,7 +10,13 @@ app.get('/define', async (req, res) => {
 
     try {
         const browser = await puppeteer.launch({
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--disable-gpu'
+            ],
         });
         const page = await browser.newPage();
         await page.goto(`https://www.ldoceonline.com/jp/dictionary/${query}`);
@@ -28,6 +34,7 @@ app.get('/define', async (req, res) => {
     }
 });
 
+// 设置监听端口
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
